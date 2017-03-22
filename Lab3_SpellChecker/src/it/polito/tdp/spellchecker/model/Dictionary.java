@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Dictionary {
@@ -39,24 +40,48 @@ public class Dictionary {
 	public List<RichWord> spellCheckText(List<String> inputTextList){
 		
 		List <RichWord> listaInput= new ArrayList<RichWord>();
-		for(String s:inputTextList){
+	     for(String s:inputTextList){
 			
 				RichWord r= new RichWord(s,cercaParola(s));
 				listaInput.add(r);
 			}
 			return listaInput;
-	}
+	
+		
+	    
+	
+	
+	  }
 	
 	public boolean cercaParola( String parola){
 
 	
-			int pos= dizionario.indexOf(parola);
-			if(pos!=-1){
-				return true;
-			}else
-				return false;
+		//int pos= dizionario.indexOf(parola);
+//			if(pos!=-1){
+//				return true;
+//			}else
+//				return false;
+//			
+			int posI=0;
+			int posF= dizionario.size()-1;
+			int posC;
+			boolean trovata=false;
+			while(trovata==false && posI<posF){
+				posC=(posI+posF)/2;
+				if(parola.compareTo(dizionario.get(posC))==0){
+					trovata=true;
+					
+				}
+					if(parola.compareTo(dizionario.get(posC))<0){
+						posF=posC-1;
+						
+					}
+						if(parola.compareTo(dizionario.get(posC))>0){
+							posI= posC+1;
+							}
+			}
+			return trovata;
 			
-			
-		}
+		 }
 	
 }
