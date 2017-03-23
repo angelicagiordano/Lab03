@@ -12,7 +12,7 @@ public class Dictionary {
 	List<String> dizionario;
 	
 	private String linguaggio;
-	
+	private String s;
 	
 	public Dictionary() {
 		dizionario= new ArrayList<String>();
@@ -27,7 +27,7 @@ public class Dictionary {
 			BufferedReader br= new BufferedReader(fr);
 			String word;
 			while((word = br.readLine())!= null){
-			 dizionario.add(word);	
+			 dizionario.add(word.toLowerCase());	
 			}
 			br.close();
 		}catch(IOException e){
@@ -64,24 +64,35 @@ public class Dictionary {
 //			
 			int posI=0;
 			int posF= dizionario.size()-1;
-			int posC;
+			int posC=0;
+			posC=(posI+posF)/2;
+			s= posI+" "+posC+" "+posF+"\n";
 			boolean trovata=false;
 			while(trovata==false && posI<posF){
-				posC=(posI+posF)/2;
+				
+				
+				//s+= posI+" "+posC+" "+posF+"\n";
 				if(parola.compareTo(dizionario.get(posC))==0){
 					trovata=true;
 					
 				}
 					if(parola.compareTo(dizionario.get(posC))<0){
 						posF=posC-1;
+						posC=(posI+posF)/2;
+						s+= posI+" "+posC+" "+posF+"\n";
 						
 					}
 						if(parola.compareTo(dizionario.get(posC))>0){
 							posI= posC+1;
+							posC=(posI+posF)/2;
+							s+= posI+" "+posC+" "+posF+"\n";
 							}
 			}
 			return trovata;
 			
 		 }
+	public String getS(){
+		return s;
+	}
 	
 }
